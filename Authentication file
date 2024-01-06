@@ -1,0 +1,39 @@
+import random
+
+# Function to generate a random numeric OTP of a specified length
+def generate_otp(length):
+    otp = ""
+    for _ in range(length):
+        otp += str(random.randint(0, 9))
+    return otp
+
+# Function to send OTP via a secure channel (e.g., email, SMS, authenticator app)
+def send_otp(otp, delivery_method, recipient):
+    # Code to send OTP through the chosen secure channel (e.g., email, SMS)
+    print(f"Sending OTP: {otp} to {recipient} via {delivery_method}")
+
+# Bank authentication process
+def bank_authentication(username):
+    # Assume user is authenticated; fetch user details from the database
+    user_details = fetch_user_details(username)
+
+    # Generate a 6-digit OTP
+    otp_length = 6
+    generated_otp = generate_otp(otp_length)
+
+    # Send OTP to the user via a secure channel (e.g., email, SMS)
+    send_otp(generated_otp, "SMS", user_details['phone_number'])
+
+    # Simulate user inputting OTP for verification
+    user_input_otp = input("Enter the OTP received: ")
+
+    # Verify the entered OTP
+    if user_input_otp == generated_otp:
+        print("OTP verification successful. User authenticated.")
+        return True
+    else:
+        print("Invalid OTP. Authentication failed.")
+        return False
+
+# Example usage:
+authenticated = bank_authentication("example_username")
